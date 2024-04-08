@@ -1,6 +1,6 @@
 {
   "name": "project_todo_list_by_abi",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "making a simple todo list using typescript,inquirer and chalk.",
   "main": "index.js",
   "type": "module",

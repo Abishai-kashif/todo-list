@@ -1,3 +1,4 @@
+#! /usr/bin/env node
 import inquirer from "inquirer";
 import chalk from "chalk";
 console.log(chalk.hex("#333333").bold("\n\t\t---------------------------------------------------------------"));
@@ -120,7 +121,3 @@ let viewTasks = async () => {
     }
 };
 main(); //avoking main function
-// thank you message
-// console.log(chalk.blue("\n\n\t\t-----------------------------------------------------------------"));
-// console.log(chalk.blue(`\t\t>>>>>>>>>>>>>>> ${chalk.hex("#8aecff").bold("THANK YOU FOR USING MY TODO-LIST!")} <<<<<<<<<<<<<<<`));
-// console.log(chalk.blue("\t\t-----------------------------------------------------------------\n"));
