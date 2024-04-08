@@ -6,6 +6,9 @@ console.log(chalk.hex("#333333").bold(`\t\t>>>>>>>>>>>>>>> ${chalk.white.bold.it
 console.log(chalk.hex("#333333").bold("\t\t---------------------------------------------------------------\n"));
 let todoList = [];
 let flag = true;
+//creating custom colors
+let maroon = chalk.hex("#850000");
+let teelGreen = chalk.hex("#0D9276");
 let main = async () => {
     while (flag) {
         console.log(); // printing an empty space for readability
@@ -16,7 +19,7 @@ let main = async () => {
             choices: ["Add a task to the todo list.",
                 "Delete task from todo list.",
                 "Update task from todo list.",
-                "Show todo list", chalk.red("Exit")]
+                "Show todo list", maroon.bold("Exit")]
         });
         console.log(); //print an empty space
         //Conditional Statements
@@ -32,7 +35,7 @@ let main = async () => {
         else if (selectedOption.option === "Show todo list") {
             await viewTasks();
         }
-        else if (selectedOption.option === chalk.red("Exit")) {
+        else if (selectedOption.option === maroon.bold("Exit")) {
             flag = false;
         }
     }
@@ -55,7 +58,7 @@ let addTask = async () => {
         }
     });
     todoList.push(addTask.task);
-    console.log(chalk.white.bold(`\n${chalk.hex("#8feeaa").bold(`"${addTask.task}"`)} is successfully added to your todo list.`));
+    console.log(chalk.white.bold(`\n${teelGreen.bold(`"${addTask.task}"`)} is successfully added to your todo list.`));
 };
 //function for deleting task
 let delTask = async () => {
@@ -78,7 +81,7 @@ let delTask = async () => {
         delTask.task.forEach((val) => {
             todoList.splice(todoList.indexOf(val), 1);
         });
-        console.log(chalk.hex("#850000").bold("\n\tThese items are removed from your todo list: "));
+        console.log(maroon.bold.underline("\n\tThese items are removed from your todo list: "));
         delTask.task.forEach((val, idx) => {
             console.log(chalk.white.bold(`${idx + 1}- ${val}.`));
         });
@@ -102,7 +105,7 @@ let updateTask = async () => {
             message: chalk.gray.bold("Enter the new task: ")
         });
         todoList.splice(todoList.indexOf(updateTask.task), 1, newTask.task);
-        console.log(chalk.white.bold(`\n${chalk.red(`"${updateTask.task}"`)} is successfully updated to ${chalk.hex("#8feeaa").bold(`"${newTask.task}"`)}.`));
+        console.log(chalk.white.bold(`\n${maroon.bold(`"${updateTask.task}"`)} is successfully updated to ${teelGreen.bold(`"${newTask.task}"`)}.`));
     }
     else {
         console.log(chalk.white.bold("You have nothing to update in your todo list."));
@@ -111,7 +114,7 @@ let updateTask = async () => {
 //function for view todo list 
 let viewTasks = async () => {
     if (todoList.length !== 0) {
-        console.log(chalk.hex("#850000").bold("\tYour todo list:"));
+        console.log(teelGreen.bold.underline("\tYour todo list:"));
         todoList.forEach((val, idx) => {
             console.log(chalk.white.bold(`${idx + 1}- ${val}.`));
         });
