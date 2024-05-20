@@ -1,14 +1,15 @@
 #! /usr/bin/env node
 import inquirer from "inquirer";
 import chalk from "chalk";
-console.log(chalk.hex("#333333").bold("\n\t\t---------------------------------------------------------------"));
-console.log(chalk.hex("#333333").bold(`\t\t>>>>>>>>>>>>>>> ${chalk.white.bold.italic("WELLCOME TO MY TODO-LIST!")} <<<<<<<<<<<<<<<<<<<<<`));
-console.log(chalk.hex("#333333").bold("\t\t---------------------------------------------------------------\n"));
+// constant aliases for custom colors
+const COLOR_GRAY = chalk.hex("#333333");
+const COLOR_MAROON = chalk.hex("#850000");
+const COLOR_TEEL_GREEN = chalk.hex("#0D9276");
+console.log(COLOR_GRAY.bold("\n\t\t---------------------------------------------------------------"));
+console.log(COLOR_GRAY.bold(`\t\t>>>>>>>>>>>>>>> ${chalk.white.bold.italic("WELLCOME TO MY TODO-LIST!")} <<<<<<<<<<<<<<<<<<<<<`));
+console.log(COLOR_GRAY.bold("\t\t---------------------------------------------------------------\n"));
 let todoList = [];
 let flag = true;
-//creating custom colors
-let maroon = chalk.hex("#850000");
-let teelGreen = chalk.hex("#0D9276");
 let main = async () => {
     while (flag) {
         console.log(); // printing an empty space for readability
@@ -16,10 +17,13 @@ let main = async () => {
             name: "option",
             type: "list",
             message: chalk.hex("#8feeaa").bold("Select an option:"),
-            choices: ["Add a task to the todo list.",
+            choices: [
+                "Add a task to the todo list.",
                 "Delete task from todo list.",
                 "Update task from todo list.",
-                "Show todo list", maroon.bold("Exit")]
+                "Show todo list",
+                COLOR_MAROON.bold("Exit"),
+            ],
         });
         console.log(); //print an empty space
         //Conditional Statements
@@ -35,11 +39,10 @@ let main = async () => {
         else if (selectedOption.option === "Show todo list") {
             await viewTasks();
         }
-        else if (selectedOption.option === maroon.bold("Exit")) {
+        else if (selectedOption.option === COLOR_MAROON.bold("Exit")) {
             flag = false;
         }
     }
-    ;
 };
 //function for adding task
 let addTask = async () => {
@@ -54,11 +57,10 @@ let addTask = async () => {
             else {
                 return true;
             }
-            ;
-        }
+        },
     });
     todoList.push(addTask.task);
-    console.log(chalk.white.bold(`\n${teelGreen.bold(`"${addTask.task}"`)} is successfully added to your todo list.`));
+    console.log(chalk.white.bold(`\n${COLOR_TEEL_GREEN.bold(`"${addTask.task}"`)} is successfully added to your todo list.`));
 };
 //function for deleting task
 let delTask = async () => {
@@ -75,13 +77,12 @@ let delTask = async () => {
                 else {
                     return true;
                 }
-                ;
-            }
+            },
         });
         delTask.task.forEach((val) => {
             todoList.splice(todoList.indexOf(val), 1);
         });
-        console.log(maroon.bold.underline("\n\tThese items are removed from your todo list: "));
+        console.log(COLOR_MAROON.bold.underline("\n\tThese items are removed from your todo list: "));
         delTask.task.forEach((val, idx) => {
             console.log(chalk.white.bold(`${idx + 1}- ${val}.`));
         });
@@ -97,24 +98,24 @@ let updateTask = async () => {
             name: "task",
             type: "list",
             message: chalk.gray.bold("What you wants to update from your todo list:"),
-            choices: todoList
+            choices: todoList,
         });
         let newTask = await inquirer.prompt({
             name: "task",
             type: "input",
-            message: chalk.gray.bold("Enter the new task: ")
+            message: chalk.gray.bold("Enter the new task: "),
         });
         todoList.splice(todoList.indexOf(updateTask.task), 1, newTask.task);
-        console.log(chalk.white.bold(`\n${maroon.bold(`"${updateTask.task}"`)} is successfully updated to ${teelGreen.bold(`"${newTask.task}"`)}.`));
+        console.log(chalk.white.bold(`\n${COLOR_MAROON.bold(`"${updateTask.task}"`)} is successfully updated to ${COLOR_TEEL_GREEN.bold(`"${newTask.task}"`)}.`));
     }
     else {
         console.log(chalk.white.bold("You have nothing to update in your todo list."));
     }
 };
-//function for view todo list 
+//function for view todo list
 let viewTasks = async () => {
     if (todoList.length !== 0) {
-        console.log(teelGreen.bold.underline("\tYour todo list:"));
+        console.log(COLOR_TEEL_GREEN.bold.underline("\tYour todo list:"));
         todoList.forEach((val, idx) => {
             console.log(chalk.white.bold(`${idx + 1}- ${val}.`));
         });
